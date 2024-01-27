@@ -6,7 +6,6 @@ public class GameDirector : MonoBehaviour
 {
     public static GameDirector Instance;
 
-
     private void Start()
     {
         SoundManager.Instance.AudioData.PlayOneShot(SoundManager.Instance.StageMusic);
@@ -24,4 +23,6 @@ public class GameDirector : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
+
+
 }

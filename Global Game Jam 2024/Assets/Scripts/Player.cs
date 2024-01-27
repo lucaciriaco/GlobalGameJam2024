@@ -1,53 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
     
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float dashSpeed = 10f;
-    [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private float _horizontalMoveSpeed = 3f;
+    [SerializeField] private float _verticalMoveSpeed = 1.5f;
+    [SerializeField] private float _dashSpeed = 10f;
+    [SerializeField] private float _dashDuration = 0.5f;
+    [SerializeField] private float _dashCooldown = 1f;
 
-    private bool isDashing;
-    private bool canDash = true;
-    private float dashTimer;
-    private LayerMask groundLayer;
+
+    private bool isGrounded;
+    private bool _isDashing;
+    private bool _canDash = true;
+    private float _dashTimer;
+    private LayerMask _enemies;
+    private LayerMask _groundLayer;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private float radius;
 
     void Start()
     {
-        groundLayer = LayerMask.GetMask("Ground");
+        _groundLayer = LayerMask.GetMask("Ground");
     }
 
     void Update()
     {
         HandleMovement();
-        HandleDash();
+        HandlePunch();
     }
 
     void HandleMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        // Dashing
-        if (Input.GetButtonDown("Horizontal") && canDash)
-        {
-            canDash = true;
-            dashTimer = 0f;
-        }
+        _isDashing = false;
+        _rigidbody.velocity = Vector2.Lerp(_rigidbody.velocity, new Vector2(horizontalInput * _horizontalMoveSpeed, verticalInput * _verticalMoveSpeed), Time.deltaTime);
 
-        if (canDash && dashTimer < dashDuration)
-        {
-            _rigidbody.velocity = new Vector2(horizontalInput * dashSpeed, _rigidbody.velocity.y);
-            dashTimer += Time.deltaTime;
-        }
-        else
-        {
-            canDash = false;
-            _rigidbody.velocity = new Vector2(horizontalInput * moveSpeed, _rigidbody.velocity.y);
-        }
 
         // Flip the character based on the direction
         if (horizontalInput < 0)
@@ -55,33 +46,56 @@ public class Player : MonoBehaviour
         else if (horizontalInput > 0)
             transform.localScale = new Vector3(1, 1, 1);
 
+        // Ground check using raycasting
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, _groundLayer);
+
         // Cooldown for dash
-        if (!canDash && dashTimer >= dashDuration)
+        if (!_canDash && _dashTimer >= _dashDuration)
         {
-            if (dashTimer >= dashCooldown)
+            if (_dashTimer >= _dashCooldown)
             {
-                canDash = true;
+                _canDash = true;
             }
+        }
+
+    }
+    void DetectEnemy()
+    {
+        var result = Physics.OverlapSphere(transform.position + offset, radius);
+        if(result[0] != null)
+            result[0].gameObject.GetComponent<IPunchable>().PersonPunched();
+    }   
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;        
+        Gizmos.DrawWireSphere(transform.position + offset, radius);
+    }
+
+    private void HandlePunch()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            DetectEnemy();
         }
     }
 
     void HandleDash()
     {
-        if (Input.GetButtonDown("Horizontal") && canDash)
+        if (Input.GetButtonDown("Horizontal") && _canDash)
         {
-            isDashing = true;
-            dashTimer = 0f;
+            _isDashing = true;
+            _dashTimer = 0f;
         }
 
-        if (dashTimer < dashDuration)
+        if (_dashTimer < _dashDuration)
         {
-            canDash = false;
-            dashTimer += Time.deltaTime;
+            _canDash = false;
+            _dashTimer += Time.deltaTime;
         }
-        else if (!canDash)
+        else if (!_canDash)
         {
-            canDash = true;
+            _canDash = true;
         }
     }
-
 }

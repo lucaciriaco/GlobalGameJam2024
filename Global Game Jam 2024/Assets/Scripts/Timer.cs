@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float totalTime = 30f;
+    private float currentTime;
+
+    private void Start()
     {
-        
+        currentTime = totalTime;
+        UpdateTimerDisplay();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (currentTime > 0)
+        {
+            currentTime -= Time.deltaTime;
+            UpdateTimerDisplay();
+        }
+        else
+        {
+
+        }
     }
+
+    private void UpdateTimerDisplay()
+    {
+        // Display the time in minutes and seconds format
+        int minutes = Mathf.FloorToInt(currentTime / 60f);
+        int seconds = Mathf.FloorToInt(currentTime % 60f);
+
+        //timerText.text = string.Format(":{1:00}", seconds);
+    }
+
 }
