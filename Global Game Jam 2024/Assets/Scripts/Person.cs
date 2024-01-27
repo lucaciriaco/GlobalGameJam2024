@@ -8,6 +8,8 @@ public class Person : MonoBehaviour, IPunchable
     [SerializeField] private float _changeDirectionInterval = 3f;
     [SerializeField] private float _timer;
 
+    [SerializeField] private float _maxUpwardsDirection = -3.55f;
+    [SerializeField] private float _maxDownwardsDirection = -9.6f;
     private States _currentState;
     Vector2 _randomDirection;
     private States CurrentState { get => _currentState; set => _currentState = value; }
@@ -27,11 +29,19 @@ public class Person : MonoBehaviour, IPunchable
 
     private void Update()
     {
-        StateMachine();
-    }
+        var position = this.gameObject.transform.position;
+        var epsilon = 0.01f;
+        if (position.y > _maxUpwardsDirection)
+        {
+            _randomDirection *= -1;
+            this.gameObject.transform.position = new Vector2(position.x, _maxUpwardsDirection - epsilon);
+        }
+        else if (position.y < _maxDownwardsDirection)
+        {
+            _randomDirection *= -1;
+            this.gameObject.transform.position = new Vector2(position.x, _maxDownwardsDirection + epsilon);
+        }
 
-    private void StateMachine()
-    {
         switch (_currentState)
         {
             case States.Walking:
@@ -60,18 +70,21 @@ public class Person : MonoBehaviour, IPunchable
         _randomDirection = RandomDirection();
     }
 
-    private Vector2[] _availableDirections = new Vector2[4] { Vector2.right, Vector2.left, Vector2.up, Vector2.down };
+    private Vector2[] _availableDirections = new Vector2[15] { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, Vector2.right, Vector2.right, Vector2.right, Vector2.left, Vector2.left, Vector2.left, Vector2.up, Vector2.down };
 
     private Vector2 _previousDirection;
 
     private Vector2 RandomDirection()
     {
-        var dir = _availableDirections[Random.Range(0, 4)];
+        var dir = _availableDirections[Random.Range(0, _availableDirections.Length)];
 
-        while (dir != _previousDirection)
+        while (dir == _previousDirection)
         {
-            dir = _availableDirections[Random.Range(0, 4)];
+            dir = _availableDirections[Random.Range(0, _availableDirections.Length)];
         }
+
+
+        _previousDirection = dir;
 
         return dir;
     }
