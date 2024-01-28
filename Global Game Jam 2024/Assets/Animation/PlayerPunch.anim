@@ -113,7 +113,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.93333334
-    functionName: 
+    functionName: CanPlayerPunch
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 0646b3299e6d86b449860ada6f425edb, type: 3}
     floatParameter: 0

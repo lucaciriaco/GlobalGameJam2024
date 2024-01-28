@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 917706799072646890}
-  _horizontalMoveSpeed: 10
-  _verticalMoveSpeed: 3
+  _horizontalMoveSpeed: 3
+  _verticalMoveSpeed: 2
   _offset: {x: 1, y: 2, z: 0}
   _radius: 0.5
   _animator: {fileID: 1367823078384431044}
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7894612300691087804}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -130,9 +130,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4838149270734940676
 BoxCollider2D:
@@ -213,6 +213,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 082fd8085c7086f4d9e19799f13392d1, type: 2}
   - {fileID: 7400000, guid: e78c0d5cc895e3a49bb8fa21b504d414, type: 2}
+  - {fileID: 7400000, guid: e4a266744555e4848847d976b06ca50b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

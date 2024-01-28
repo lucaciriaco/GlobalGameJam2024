@@ -8,7 +8,10 @@ public class NPC : MonoBehaviour, IPunchable
     [SerializeField] private float _speed = 15f;
     [SerializeField] private float _changeDirectionInterval = 3f;
     [SerializeField] private float _timer;
+    [SerializeField] BoxCollider2D _boxCollider;
+    [SerializeField] private SpriteRenderer _sprite;
 
+    private float _timeToChangeState;
     private float _upMapBounds;
     private float _downMapBounds;
     private float _leftMapBounds;
@@ -21,6 +24,7 @@ public class NPC : MonoBehaviour, IPunchable
     private enum States
     {
         Walking,
+        Sad,
         Punched,
         Laughing,
     }
@@ -55,18 +59,23 @@ public class NPC : MonoBehaviour, IPunchable
         {
             _randomDirection *= -1;
             this.gameObject.transform.position = new Vector2(position.x, _rightMapBounds - epsilon);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if
             (position.x < _leftMapBounds)
         {
             _randomDirection *= -1;
             this.gameObject.transform.position = new Vector2(position.x, _leftMapBounds - epsilon);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         switch (_currentState)
         {
             case States.Walking:
                 Walking();
+                break;
+            case States.Sad:
+
                 break;
             case States.Punched:
 
@@ -79,11 +88,17 @@ public class NPC : MonoBehaviour, IPunchable
 
     private void Walking()
     {
+        _timeToChangeState = Random.Range(0, 15);
+        _boxCollider.enabled = false;
         _timer -= Time.deltaTime;
         if (_timer <= 0f)
         {
             ChangeDirection();
             _timer = _changeDirectionInterval;
+        }
+        if (_timer == _timeToChangeState) 
+        {
+
         }
         transform.Translate(_randomDirection * _speed * Time.deltaTime);
     }

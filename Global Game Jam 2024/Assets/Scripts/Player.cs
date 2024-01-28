@@ -10,22 +10,25 @@ public class Player : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private Animator _animator;
 
-    private bool _punchAnimationEnded;
+    private bool _canPunch;
 
     void Update()
     {
-        HandleMovement();
-        HandlePunch();
-    }
-
-    void HandleMovement()
-    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        
-        _rigidbody.velocity = Vector2.Lerp(_rigidbody.velocity, new Vector2(horizontalInput * _horizontalMoveSpeed, verticalInput * _verticalMoveSpeed), Time.deltaTime);
-        _animator.speed = _horizontalMoveSpeed;
-        _animator.speed = _verticalMoveSpeed;
+
+        var gd = GameDirector.Instance;
+        var min = new Vector2(gd.LeftMapBounds, gd.UpMapBounds);
+        var max = new Vector2(gd.RightMapBounds, gd.DownMapBounds);
+
+        var delta = new Vector3(horizontalInput, verticalInput);
+        var pos = this.gameObject.transform.position + delta;
+
+        pos = Vector2.Min(max, Vector2.Max(min, pos));
+
+        this.gameObject.transform.position = pos;
+
+        _animator.SetFloat("Speed", Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
 
         if (horizontalInput < 0)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -33,9 +36,16 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
     }
 
+    private void FixedUpdate()
+    {
+        HandlePunch();
+    }
+
+
     void DetectEnemy()
     {
-        var result = Physics.OverlapSphere(transform.position + _offset, _radius);
+        var scaleX = transform.localScale.x;
+        var result = Physics.OverlapSphere(transform.position + _offset * scaleX, _radius);
         if(result != null)
         {
             for (int i = 1; i < result.Length; i++)
@@ -56,7 +66,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            DetectEnemy();
+            if(_canPunch)
+                DetectEnemy();
         }
+    }
+
+    private void CanPlayerPunch()
+    {
+       
     }
 }

@@ -7,19 +7,15 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private GameObject _NPC;
 
     [SerializeField] private float totalTime = 30f;
-
-    [SerializeField] private int _currentNPCPopulation;
     [SerializeField] private int _maxNPCPopulation;
-
-    [SerializeField] private PolygonCollider2D _polygonCollider;
-
-    [SerializeField] private float _upMapBounds;
-    [SerializeField] private float _downMapBounds;
-    [SerializeField] private float _leftMapBounds;
-    [SerializeField] private float _rightMapBounds;
+    [SerializeField] private float _upMapBounds = -2.31f;
+    [SerializeField] private float _downMapBounds = -7.48f;
+    [SerializeField] private float _leftMapBounds = -27.91f;
+    [SerializeField] private float _rightMapBounds = 37.14f;
 
     [SerializeField] private Vector2 spawnBoxSize = new Vector2(5f, 5f);
 
+    private int _currentNPCPopulation;
     private float currentTime;
     private int score = 0;
 
@@ -66,27 +62,6 @@ public class GameDirector : MonoBehaviour
         Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
 
         Instantiate(_NPC, spawnPosition, Quaternion.identity, this.gameObject.transform);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (_polygonCollider == null)
-        {
-            _polygonCollider = GetComponent<PolygonCollider2D>();
-        }
-
-        if (_polygonCollider != null && _polygonCollider.points.Length > 0)
-        {
-            Gizmos.color = Color.green;
-
-            for (int i = 0; i < _polygonCollider.points.Length; i++)
-            {
-                Vector3 currentPoint = transform.TransformPoint(_polygonCollider.points[i]);
-                Vector3 nextPoint = transform.TransformPoint(_polygonCollider.points[(i + 1) % _polygonCollider.points.Length]);
-
-                Gizmos.DrawLine(currentPoint, nextPoint);
-            }
-        }
     }
 
 }

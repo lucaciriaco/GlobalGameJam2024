@@ -52,6 +52,8 @@ MonoBehaviour:
   _speed: 2
   _changeDirectionInterval: 3
   _timer: 0
+  _boxCollider: {fileID: 4458102746124093912}
+  _sprite: {fileID: 6616302608338063534}
 --- !u!212 &6616302608338063534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0f6d31f18c1bac64e9436ae61aebc82d, type: 3}
-  m_Color: {r: 1, g: 0.3066038, b: 0.3066038, a: 0.6509804}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6509804}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +161,7 @@ Animator:
   m_GameObject: {fileID: 8017397215297918843}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d1544d370b850e4ebbef80a441105c7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
