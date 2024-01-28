@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2611588416547295264}
   - component: {fileID: 6616302608338063534}
   - component: {fileID: 4458102746124093912}
-  - component: {fileID: 6598269116868569002}
+  - component: {fileID: 6298486567714441959}
+  - component: {fileID: 5909324016652146735}
   m_Layer: 0
-  m_Name: Person
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae90a2a5a3685740916175dbd4cf219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   _speed: 2
   _changeDirectionInterval: 3
   _timer: 0
-  _maxUpwardsDirection: -3.55
-  _maxDownwardsDirection: -9.6
 --- !u!212 &6616302608338063534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -149,30 +149,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.91, y: 2.5140176}
   m_EdgeRadius: 0
---- !u!50 &6598269116868569002
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!95 &6298486567714441959
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8017397215297918843}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &5909324016652146735
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017397215297918843}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

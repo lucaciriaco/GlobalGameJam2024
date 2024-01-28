@@ -28,11 +28,8 @@ public class Timer : MonoBehaviour
 
     private void UpdateTimerDisplay()
     {
-        // Display the time in minutes and seconds format
         int minutes = Mathf.FloorToInt(currentTime / 60f);
         int seconds = Mathf.FloorToInt(currentTime % 60f);
-
-        //timerText.text = string.Format(":{1:00}", seconds);
     }
 
 }

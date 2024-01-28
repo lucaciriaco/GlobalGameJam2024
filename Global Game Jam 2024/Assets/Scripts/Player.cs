@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private Animator _animator;
 
+    private bool _punchAnimationEnded;
+
     void Update()
     {
         HandleMovement();
@@ -22,8 +24,8 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         
         _rigidbody.velocity = Vector2.Lerp(_rigidbody.velocity, new Vector2(horizontalInput * _horizontalMoveSpeed, verticalInput * _verticalMoveSpeed), Time.deltaTime);
-        _animator.speed = _rigidbody.velocity.x;
-        _animator.speed = _rigidbody.velocity.y;
+        _animator.speed = _horizontalMoveSpeed;
+        _animator.speed = _verticalMoveSpeed;
 
         if (horizontalInput < 0)
             transform.localScale = new Vector3(-1, 1, 1);

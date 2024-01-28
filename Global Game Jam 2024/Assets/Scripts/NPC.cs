@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour, IPunchable
 {
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _speed = 15f;
     [SerializeField] private float _changeDirectionInterval = 3f;
     [SerializeField] private float _timer;
 
-    private float _maxUpwardsDirection;
-    private float _maxDownwardsDirection;
+    private float _upMapBounds;
+    private float _downMapBounds;
+    private float _leftMapBounds;
+    private float _rightMapBounds;
+
     private States _currentState;
     Vector2 _randomDirection;
     private States CurrentState { get => _currentState; set => _currentState = value; }
@@ -26,8 +30,10 @@ public class NPC : MonoBehaviour, IPunchable
         ChangeDirection();
         _currentState = States.Walking;
         _timer = _changeDirectionInterval;
-        _maxUpwardsDirection = GameDirector.Instance.UpMapBounds;
-        _maxDownwardsDirection = GameDirector.Instance.DownMapBounds;
+        _upMapBounds = GameDirector.Instance.UpMapBounds;
+        _downMapBounds = GameDirector.Instance.DownMapBounds;
+        _leftMapBounds = GameDirector.Instance.LeftMapBounds;
+        _rightMapBounds = GameDirector.Instance.RightMapBounds;
         GameDirector.Instance.CurrentNPCPopulation = GameDirector.Instance.CurrentNPCPopulation + 1;
     }
 
@@ -35,15 +41,26 @@ public class NPC : MonoBehaviour, IPunchable
     {
         var position = this.gameObject.transform.position;
         var epsilon = 0.01f;
-        if (position.y > _maxUpwardsDirection)
+        if (position.y > _upMapBounds)
         {
             _randomDirection *= -1;
-            this.gameObject.transform.position = new Vector2(position.x, _maxUpwardsDirection - epsilon);
+            this.gameObject.transform.position = new Vector2(position.x, _upMapBounds - epsilon);
         }
-        else if (position.y < _maxDownwardsDirection)
+        else if (position.y < _downMapBounds)
         {
             _randomDirection *= -1;
-            this.gameObject.transform.position = new Vector2(position.x, _maxDownwardsDirection + epsilon);
+            this.gameObject.transform.position = new Vector2(position.x, _downMapBounds + epsilon);
+        }
+        if (position.x > _rightMapBounds)
+        {
+            _randomDirection *= -1;
+            this.gameObject.transform.position = new Vector2(position.x, _rightMapBounds - epsilon);
+        }
+        else if
+            (position.x < _leftMapBounds)
+        {
+            _randomDirection *= -1;
+            this.gameObject.transform.position = new Vector2(position.x, _leftMapBounds - epsilon);
         }
 
         switch (_currentState)
@@ -55,7 +72,7 @@ public class NPC : MonoBehaviour, IPunchable
 
                 break;
             case States.Laughing:
-
+                GameDirector.Instance.Score = GameDirector.Instance.Score + 10;
                 break;
         }
     }
