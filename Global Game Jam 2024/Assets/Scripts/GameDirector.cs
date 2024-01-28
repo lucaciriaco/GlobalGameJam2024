@@ -15,15 +15,25 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private float _leftMapBounds;
     [SerializeField] private float _rightMapBounds;
 
-    public float UpMapBounds { get => _upMapBounds; set => _upMapBounds = value; }
-    public float DownMapBounds { get => _downMapBounds; set => _downMapBounds = value; }
-    public float LeftMapBounds { get => _leftMapBounds; set => _leftMapBounds = value; }
-    public float RightMapBounds { get => _rightMapBounds; set => _rightMapBounds = value; }
+    public float UpMapBounds { get => _upMapBounds;}
+    public float DownMapBounds { get => _downMapBounds;}
+    public float LeftMapBounds { get => _leftMapBounds;}
+    public float RightMapBounds { get => _rightMapBounds;}
     public int CurrentNPCPopulation { get => _currentNPCPopulation; set => _currentNPCPopulation = value; }
 
     private void Start()
     {
         SoundManager.Instance.AudioData.PlayOneShot(SoundManager.Instance.StageMusic);
+        for(int i=0; i < _maxNPCPopulation; i++)
+        {
+            SpawnNPC();
+        }
+    }
+
+    private void Update()
+    {
+        if (_currentNPCPopulation <= _maxNPCPopulation)
+            SpawnNPC();
     }
 
     private void Awake()
@@ -41,7 +51,8 @@ public class GameDirector : MonoBehaviour
 
     private void SpawnNPC()
     {
-
+        var randomPosition = new Vector3(Random.Range(_leftMapBounds + 5f, _rightMapBounds - 5f), Random.Range(_downMapBounds + 5f, _upMapBounds - 5f));
+        Instantiate(_NPC, randomPosition, Quaternion.identity, _NPC.transform);
     }
 
     private void OnDrawGizmos()
