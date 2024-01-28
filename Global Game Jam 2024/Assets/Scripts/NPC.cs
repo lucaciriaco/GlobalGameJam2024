@@ -8,8 +8,8 @@ public class NPC : MonoBehaviour, IPunchable
     [SerializeField] private float _changeDirectionInterval = 3f;
     [SerializeField] private float _timer;
 
-    [SerializeField] private float _maxUpwardsDirection = -3.55f;
-    [SerializeField] private float _maxDownwardsDirection = -9.6f;
+    private float _maxUpwardsDirection;
+    private float _maxDownwardsDirection;
     private States _currentState;
     Vector2 _randomDirection;
     private States CurrentState { get => _currentState; set => _currentState = value; }
@@ -18,6 +18,7 @@ public class NPC : MonoBehaviour, IPunchable
     {
         Walking,
         Punched,
+        Laughing,
     }
 
     private void Start()
@@ -25,6 +26,9 @@ public class NPC : MonoBehaviour, IPunchable
         ChangeDirection();
         _currentState = States.Walking;
         _timer = _changeDirectionInterval;
+        _maxUpwardsDirection = GameDirector.Instance.UpMapBounds;
+        _maxDownwardsDirection = GameDirector.Instance.DownMapBounds;
+        GameDirector.Instance.CurrentNPCPopulation = GameDirector.Instance.CurrentNPCPopulation + 1;
     }
 
     private void Update()
@@ -50,7 +54,9 @@ public class NPC : MonoBehaviour, IPunchable
             case States.Punched:
 
                 break;
+            case States.Laughing:
 
+                break;
         }
     }
 
@@ -82,15 +88,17 @@ public class NPC : MonoBehaviour, IPunchable
         {
             dir = _availableDirections[Random.Range(0, _availableDirections.Length)];
         }
-
-
         _previousDirection = dir;
-
         return dir;
     }
 
     public void PersonPunched()
     {
         CurrentState = States.Punched;
+    }
+
+    private void OnDisable()
+    {
+        GameDirector.Instance.CurrentNPCPopulation = GameDirector.Instance.CurrentNPCPopulation - 1;
     }
 }

@@ -55,8 +55,8 @@ MonoBehaviour:
   _dashSpeed: 0
   _dashDuration: 0
   _dashCooldown: 1
-  _offset: {x: 0, y: 0, z: 0}
-  _radius: 0
+  _offset: {x: 1, y: 2, z: 0}
+  _radius: 0.5
 --- !u!212 &6734290392975806142
 SpriteRenderer:
   m_ObjectHideFlags: 0

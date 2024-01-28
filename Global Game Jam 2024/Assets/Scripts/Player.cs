@@ -6,9 +6,6 @@ public class Player : MonoBehaviour
     
     [SerializeField] private float _horizontalMoveSpeed = 3f;
     [SerializeField] private float _verticalMoveSpeed = 1.5f;
-    [SerializeField] private float _dashSpeed = 10f;
-    [SerializeField] private float _dashDuration = 0.5f;
-    [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private float _radius;
 
