@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Person : MonoBehaviour, IPunchable
+public class NPC : MonoBehaviour, IPunchable
 {
     [SerializeField] private float _speed = 15f;
     [SerializeField] private float _changeDirectionInterval = 3f;

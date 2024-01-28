@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6734290392975806142}
   - component: {fileID: 917706799072646890}
   - component: {fileID: 4838149270734940676}
+  - component: {fileID: 1367823078384431044}
+  - component: {fileID: 8562601824468154815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -53,8 +55,8 @@ MonoBehaviour:
   _dashSpeed: 0
   _dashDuration: 0
   _dashCooldown: 1
-  offset: {x: -0.5, y: 0, z: 0}
-  radius: 0.2
+  _offset: {x: 0, y: 0, z: 0}
+  _radius: 0
 --- !u!212 &6734290392975806142
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -166,10 +168,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005663693, y: -1.3175828}
+  m_Offset: {x: -0.005663693, y: 1.1560917}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.48882726, y: 0.06679502}
     oldSize: {x: 1.91, y: 4.22}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
@@ -177,5 +179,43 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4626535, y: 1.3988118}
+  m_Size: {x: 1.4626535, y: 2.8915462}
   m_EdgeRadius: 0
+--- !u!95 &1367823078384431044
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894612300691087804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88c66906a873cc24a9fdc8fc99bcc754, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &8562601824468154815
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894612300691087804}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 082fd8085c7086f4d9e19799f13392d1, type: 2}
+  - {fileID: 7400000, guid: e78c0d5cc895e3a49bb8fa21b504d414, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -313,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 278429123}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49138394, y: -2.9627953, z: -19.966072}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -766,6 +766,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level
       objectReference: {fileID: 0}
+    - target: {fileID: 2406791348006744669, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406791348006744669, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127238468384983559, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3353612162470098274, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.9221964
@@ -807,7 +819,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1707829280801004621, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
+    - {fileID: 7304238522904753872, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8083deba10fdea4cb91e47e8849d636, type: 3}
@@ -829,7 +843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8445428519912828235, guid: 42dda1172af439b4dbb539a7edfbbeaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.88
+      value: -4.92
       objectReference: {fileID: 0}
     - target: {fileID: 8445428519912828235, guid: 42dda1172af439b4dbb539a7edfbbeaf, type: 3}
       propertyPath: m_LocalPosition.z
