@@ -52,9 +52,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 917706799072646890}
   _horizontalMoveSpeed: 10
   _verticalMoveSpeed: 3
-  _dashSpeed: 0
-  _dashDuration: 0
-  _dashCooldown: 1
   _offset: {x: 1, y: 2, z: 0}
   _radius: 0.5
 --- !u!212 &6734290392975806142
