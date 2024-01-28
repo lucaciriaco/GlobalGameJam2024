@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _verticalMoveSpeed = 1.5f;
     [SerializeField] private Vector3 _offset;
     [SerializeField] private float _radius;
+    [SerializeField] private Animator _animator;
 
     void Update()
     {
@@ -19,8 +20,10 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
+        
         _rigidbody.velocity = Vector2.Lerp(_rigidbody.velocity, new Vector2(horizontalInput * _horizontalMoveSpeed, verticalInput * _verticalMoveSpeed), Time.deltaTime);
+        _animator.speed = _rigidbody.velocity.x;
+        _animator.speed = _rigidbody.velocity.y;
 
         if (horizontalInput < 0)
             transform.localScale = new Vector3(-1, 1, 1);
