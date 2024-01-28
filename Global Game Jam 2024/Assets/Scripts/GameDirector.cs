@@ -52,7 +52,7 @@ public class GameDirector : MonoBehaviour
     private void SpawnNPC()
     {
         var randomPosition = new Vector3(Random.Range(_leftMapBounds + 5f, _rightMapBounds - 5f), Random.Range(_downMapBounds + 5f, _upMapBounds - 5f));
-        Instantiate(_NPC, randomPosition, Quaternion.identity, _NPC.transform);
+        Instantiate(_NPC, randomPosition, Quaternion.identity, this.gameObject.transform);
     }
 
     private void OnDrawGizmos()

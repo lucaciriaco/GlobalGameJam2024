@@ -712,9 +712,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ada4524f48ee5438f5c5c83390f995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _NPC: {fileID: 0}
+  _NPC: {fileID: 8017397215297918843, guid: 00f9befb86e617a499f2529d46f400b2, type: 3}
   _currentNPCPopulation: 0
-  _maxNPCPopulation: 0
+  _maxNPCPopulation: 8
   _upMapBounds: 0
   _downMapBounds: -10
   _leftMapBounds: 0
