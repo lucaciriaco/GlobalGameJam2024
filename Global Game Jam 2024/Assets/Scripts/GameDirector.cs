@@ -24,7 +24,7 @@ public class GameDirector : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.AudioData.PlayOneShot(SoundManager.Instance.StageMusic);
-        for(int i=0; i < _maxNPCPopulation; i++)
+        for(int i=0; i <= _maxNPCPopulation; i++)
         {
             SpawnNPC();
         }
@@ -32,7 +32,7 @@ public class GameDirector : MonoBehaviour
 
     private void Update()
     {
-        if (_currentNPCPopulation <= _maxNPCPopulation)
+        if (_currentNPCPopulation < _maxNPCPopulation)
             SpawnNPC();
     }
 
